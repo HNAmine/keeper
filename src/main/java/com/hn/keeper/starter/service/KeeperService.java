@@ -5,7 +5,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class KeeperService {
 
-	public void call() {
-		System.out.println("lets work !");
+	private String currentTransformer;
+
+	public String getCurrentTransformer() {
+		return currentTransformer;
 	}
+
+	public void setCurrentTransformer(String currentTransformer) {
+		this.currentTransformer = currentTransformer;
+	}
+
 }
