@@ -1,28 +1,33 @@
 package com.hn.keeper.model;
 
-import com.hn.keeper.starter.core.JsonField;
 import com.hn.keeper.starter.model.Keeper;
 
 public class User implements Keeper {
 
-	@JsonField("custom_login")
-	private String login;
+	private String firstName;
 
-	@JsonField
-	private String password;
+	private String lastName;
 
-	public User(String login, String password) {
+	public User(String firstName, String lastName) {
 		super();
-		this.login = login;
-		this.password = password;
+		this.firstName = lastName;
+		this.lastName = lastName;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }
