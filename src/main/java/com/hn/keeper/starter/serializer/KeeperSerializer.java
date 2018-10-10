@@ -1,7 +1,6 @@
 package com.hn.keeper.starter.serializer;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonComponent;
@@ -11,6 +10,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
+import com.hn.keeper.starter.model.Action;
 import com.hn.keeper.starter.model.Keeper;
 import com.hn.keeper.starter.service.KeeperService;
 import com.hn.keeper.starter.util.KeeperUtil;
@@ -37,6 +37,8 @@ public class KeeperSerializer extends JsonSerializer<Keeper> {
 			jsonGenerator.writeObjectField(keeperService.getCurrentTransformer().split("=")[0],
 					KeeperUtil.getFieldValueOfObject(payload, "firstName") + " "
 							+ KeeperUtil.getFieldValueOfObject(payload, "lastName"));
+			
+			jsonGenerator.writeObjectField("deep", new Action("test", "=", "asign"));
 		}
 
 		jsonGenerator.writeEndObject();

@@ -14,10 +14,15 @@ import com.hn.keeper.model.User;
 public class UserController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public List<User> getUser(Long user) {
+	public List<User> getUsers(Long user) {
 		List<User> cars = new ArrayList<>();
 		cars.add(new User("Amine", "HANANE"));
 		cars.add(new User("Ayoub", "HANANE"));
 		return cars;
+	}
+
+	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	public User getUser(Long user) {
+		return new User("Amine", "HANANE");
 	}
 }
