@@ -1,7 +1,6 @@
 package com.hn.keeper.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +13,16 @@ import com.hn.keeper.model.User;
 @RequestMapping(value = "/users")
 public class UserController {
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public List<User> getUsers(Long user) {
+		List<User> users = new ArrayList<>();
+		users.add(new User("Amine", "HANANE"));
+		users.add(new User("Ayoub", "HANANE"));
+		return users;
+	}
+
+	@RequestMapping(value = "/id", method = RequestMethod.GET)
 	public User getUser(Long user) {
-		List<User> cars = new ArrayList<>();
-		cars.add(new User("login 1", "password 1", new Date()));
-		cars.add(new User("login 2", "password 2"));
-		return new User("login 2", "password 2");
-//		return cars;
+		return new User("Amine", "HANANE");
 	}
 }

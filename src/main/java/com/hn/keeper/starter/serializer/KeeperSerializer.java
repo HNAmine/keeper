@@ -10,8 +10,11 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.BeanSerializerFactory;
+import com.hn.keeper.starter.model.Action;
 import com.hn.keeper.starter.model.Keeper;
 import com.hn.keeper.starter.service.KeeperService;
+import com.hn.keeper.starter.util.KeeperUtil;
+import com.fasterxml.jackson.databind.BeanDescription;
 
 @JsonComponent
 public class KeeperSerializer extends JsonSerializer<Keeper> {
@@ -26,13 +29,20 @@ public class KeeperSerializer extends JsonSerializer<Keeper> {
 		jsonGenerator.writeStartObject();
 
 		JavaType javaType = serializerProvider.constructType(payload.getClass());
-		com.fasterxml.jackson.databind.BeanDescription beanDesc = serializerProvider.getConfig().introspect(javaType);
+		BeanDescription beanDesc = serializerProvider.getConfig().introspect(javaType);
 		JsonSerializer<Object> serializer = BeanSerializerFactory.instance.findBeanSerializer(serializerProvider,
 				javaType, beanDesc);
 
 		serializer.unwrappingSerializer(null).serialize(payload, jsonGenerator, serializerProvider);
 
-		jsonGenerator.writeObjectField("extra_field", keeperService.getCurrentTransformer());
+		if (keeperService.getCurrentTransformer() != null) {
+			jsonGenerator.writeObjectField(keeperService.getCurrentTransformer().split("=")[0],
+					KeeperUtil.getFieldValueOfObject(payload, "firstName") + " "
+							+ KeeperUtil.getFieldValueOfObject(payload, "lastName"));
+
+			jsonGenerator.writeObjectField("deep", new Action("test", "=", "asign"));
+		}
+
 		jsonGenerator.writeEndObject();
 	}
 
