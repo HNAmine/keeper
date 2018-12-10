@@ -4,7 +4,8 @@ public class KeeperUtil {
 
 	public static String[] decode(String transformer) throws Exception {
 		if (transformer == null) {
-			throw new Exception("throw axception here !");
+			return null;
+			// throw new Exception("throw axception here !");
 		}
 		return transformer.split(";");
 	}
